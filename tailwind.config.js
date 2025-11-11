@@ -4,7 +4,25 @@ module.exports = {
   content: ["./App.tsx", "./components/**/*.{js,jsx,ts,tsx}", "./app/**/*.{js,jsx,ts,tsx}",],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors: { 
+        'main': {
+          DEFAULT: '#FFFFFF',
+        },
+        'dark': {
+          DEFAULT: '#0E1726'
+        },
+        'blue': {
+          DEFAULT: '#219FE3'
+        },
+        'orange': {
+          DEFAULT: '#0E1726'
+        }
+      }
+    },
+    fontFamily: {
+      urbanist: ['Urbanist']
+    }
   },
   plugins: [],
 }
