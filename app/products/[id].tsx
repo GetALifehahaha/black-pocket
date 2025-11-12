@@ -15,6 +15,24 @@ const Product = () => {
 
     const product: any = ShoppingData.find(prod => prod.id?.toLocaleString() == id);
     const features: any = Object.entries(product?.features?? {}).map(([label, value]) => ({id: label, label, value}))
+    
+    const addToCart = () => {
+
+        const data = localStorage.getItem('cart');
+        let cartData = JSON.parse(data) || [];
+
+        const strId = Array.isArray(id) ? id[0] : id;
+        const numId = Number.parseInt(strId);
+
+        if (cartData.includes(numId)) {
+            console.log("Product is already in the cart");
+            return;
+        }
+
+        const newCart = [...cartData, numId];
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        console.log("Item has been added to cart");
+    }
 
     return (
         <View className='flex-1 bg-black/10'>
@@ -32,10 +50,10 @@ const Product = () => {
                         {product?.name}
                     </Text>
                     <View className='flex-col justify-between items-end'>
-                        <Text className='font-semibold text-black/75 text-xl px-2 py-1 rounded-lg shadow-md shadow-black/15'>
+                        <Text className='font-bold text-black text-xl px-2 py-1 rounded-lg shadow-md shadow-black/15'>
                             ₱ {product?.price}
                         </Text>
-                        <View className='flex-row gap-2 items-center px-2 py-1 rounded-md shadow-md shadow-black/15'>
+                        <View className='flex-row gap-2 items-center'>
                             <Text className='font-semibold text-black/50 text-xl'>
                                 {product?.ratings}
                             </Text>
@@ -45,45 +63,45 @@ const Product = () => {
                 </View>
 
                 <View className='p-4 bg-main mt-2'>
-                    <Text className='text-black/50 font-semibold text-lg'>
+                    <Text className='text-black/50 font-semibold text-sm'>
                         Description
                     </Text>
 
-                    <Text numberOfLines={(descriptionExpanded ? undefined : 3 )} className='p-2 font-medium text-lg'>
+                    <Text numberOfLines={(descriptionExpanded ? undefined : 3 )} className='p-2 font-base text-lg'>
                         {product?.description}
                     </Text>
                     <TouchableOpacity className='ml-auto' onPress={() => setDescriptionExpanded(!descriptionExpanded)}><Text className='semibold text-md'>{descriptionExpanded ? 'Read Less' : 'Read More'}</Text></TouchableOpacity>
                 </View>
 
                 <View className='p-4 bg-main mt-2'>
-                    <Text className='text-black/50 font-semibold text-lg'>
+                    <Text className='text-black/50 font-semibold text-sm'>
                         Features
                     </Text>
 
-                    <Text className='p-2 font-medium text-lg'>
+                    <Text className='p-2 text-lg'>
                         {product &&
 
                             <FlatList data={features} renderItem={({item}) => <View className='flex-row gap-2'>
-                                <Text className='font-semibold text-black/75'>{item.label}:</Text>
-                                <Text className='font-base'>{item.value}</Text>
+                                <Text className='font-base text-black/75'>{item.label}:</Text>
+                                <Text className='font-semibold'>{item.value}</Text>
                             </View>} />
                         }
                     </Text>
                 </View>
 
                 <View className='p-4 bg-main mt-2'>
-                    <Text className='text-black/50 font-semibold text-lg'>
-                        Description
+                    <Text className='text-black/50 font-semibold text-sm'>
+                        Condition
                     </Text>
 
-                    <Text className='p-2 font-medium text-lg'>
-                        {product?.description}
+                    <Text className='p-2 font-base text-lg'>
+                        {product?.condition}
                     </Text>
                 </View>
             </ScrollView>
 
             <View className='absolute bottom-0 w-full flex-row p-2 gap-2 z-100'> 
-                <TouchableOpacity className='p-4 bg-gray-50 rounded-md shadow-md'>
+                <TouchableOpacity className='p-4 bg-gray-50 rounded-md shadow-md' onPress={addToCart}>
                     <ShoppingCart size={28} className='text-black/75' />
                 </TouchableOpacity>
 

@@ -92,7 +92,7 @@ export default function Shop() {
 					<Text className='text-xs text-black/50'>Category: {activeCategory}</Text><X size={12} className='text-black/50' />
 				</TouchableOpacity>}
 			{(sortType) && 
-				<TouchableOpacity onPress={() => {setSortType(''); setSortOrder('')}} className='px-2 py-0.5 rounded-xl border border-black/20 w-fit flex-row gap-2 items-center'>
+				<TouchableOpacity onPress={() => {setSortType(''); setSortOrder('')}} className='px-2 py-0.5 rounded-xl border border-black/20 w-fit flex-row gap-2 items-center '>
 					<Text className='text-xs text-black/50'>Sort: {capitalize(sortType)} : {capitalize(sortOrder)}</Text><X size={12} className='text-black/50' />
 				</TouchableOpacity>}
 		</ScrollView>
