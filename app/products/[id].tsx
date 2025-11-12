@@ -1,6 +1,6 @@
 import { ShoppingData } from '@/data/ShoppingData';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { ChevronLeft, ShoppingCart } from 'lucide-react-native';
+import { ChevronLeft, ShoppingCart, StarIcon } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Dimensions, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
@@ -13,14 +13,13 @@ const Product = () => {
 
     const { id } = useLocalSearchParams();
 
-    const product: any = ShoppingData.find(prod => prod.id.toLocaleString() == id);
+    const product: any = ShoppingData.find(prod => prod.id?.toLocaleString() == id);
     const features: any = Object.entries(product?.features?? {}).map(([label, value]) => ({id: label, label, value}))
 
     return (
         <View className='flex-1 bg-black/10'>
-            <TouchableOpacity onPress={() => navigate.goBack()} className='flex-row gap-2 items-center absolute z-10 bg-white px-4 py-2 rounded-full top-2 left-2'>
-                <ChevronLeft size={18} />
-                <Text className='font-semibold'>Back</Text>
+            <TouchableOpacity onPress={() => navigate.goBack()} className='flex-row gap-2 items-center absolute z-10 bg-white p-2 rounded-xl aspect-square top-2 left-2 border border-black/50'>
+                <ChevronLeft size={28} />
             </TouchableOpacity>
             <ScrollView className='relative' contentContainerStyle={{ paddingBottom: 120 }}>
                 <Image source={product?.imagePath} style={{
@@ -32,9 +31,17 @@ const Product = () => {
                     <Text numberOfLines={3} className='font-semibold w-64 text-xl'>
                         {product?.name}
                     </Text>
-                    <Text className='font-semibold text-text text-xl'>
-                        ₱ {product?.price}
-                    </Text>
+                    <View className='flex-col justify-between items-end'>
+                        <Text className='font-semibold text-black/75 text-xl px-2 py-1 rounded-lg shadow-md shadow-black/15'>
+                            ₱ {product?.price}
+                        </Text>
+                        <View className='flex-row gap-2 items-center px-2 py-1 rounded-md shadow-md shadow-black/15'>
+                            <Text className='font-semibold text-black/50 text-xl'>
+                                {product?.ratings}
+                            </Text>
+                            <StarIcon size={16} className='ml-auto text-yellow-500'/>
+                        </View>
+                    </View>
                 </View>
 
                 <View className='p-4 bg-main mt-2'>
