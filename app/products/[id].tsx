@@ -50,10 +50,20 @@ const Product = () => {
                         {product?.name}
                     </Text>
                     <View className='flex-col justify-between items-end'>
-                        <Text className='font-bold text-black text-xl px-2 py-1 rounded-lg shadow-md shadow-black/15'>
-                            ₱ {product?.price}
-                        </Text>
-                        <View className='flex-row gap-2 items-center'>
+                        {product?.discount ? 
+                            <View className='flex-col items-end px-2 py-1 rounded-lg border border-gray-300 shadow-black/15'>
+                                <Text className='font-bold text-black text-xl items-center'>
+                                    ₱ {Number(product.price + product.price * product.discount).toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                                </Text>
+                                <Text className='font-semiboldbold text-black text-md line-through'>
+                                    {Number(product.price).toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                                </Text>
+                            </View> :
+                            <Text className='font-bold text-black text-xl px-2 py-1 rounded-lg border border-gray-300 shadow-black/15'>
+                                ₱ {Number(product.price).toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                            </Text>
+                        }
+                        <View className='flex-row gap-2 items-center mt-2'>
                             <Text className='font-semibold text-black/50 text-xl'>
                                 {product?.ratings}
                             </Text>

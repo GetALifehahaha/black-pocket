@@ -4,6 +4,7 @@ export const ShoppingData = [
     name: "Kalashnikov AK-47 Tactical Series — 7.62 Heritage Edition",
     category: "rifles",
     price: 38041.83,
+    discount: 0.20,
     ratings: 4.8,
     imagePath: require("../assets/images/ak47.jpg"),
     description:
@@ -26,6 +27,7 @@ export const ShoppingData = [
     name: "AWP — Precision Long-Range Rifle",
     category: "sniper rifles",
     price: 75876.43,
+    discount: 0.10,
     ratings: 4.4,
     imagePath: require("../assets/images/awp.jpg"),
     description:
@@ -49,6 +51,7 @@ export const ShoppingData = [
     name: "M4A1 — Carbine Field Edition",
     category: "rifles",
     price: 48712.21,
+    discount: 0.24,
     ratings: 4.9,
     imagePath: require("../assets/images/m4a1.jpg"),
     description:
@@ -75,6 +78,7 @@ export const ShoppingData = [
     name: "M84 Flashbang Grenade — Training & Range Use",
     category: "utilities",
     price: 1250.0,
+      discount: 0.21,
     ratings: 4.4,
     imagePath: require("../assets/images/flashbang.jpg"),
     description:
@@ -95,6 +99,7 @@ export const ShoppingData = [
     name: "Tactical Gunstock — Adjustable Precision Stock",
     category: "accessories",
     price: 2999.99,
+      discount: 0.30,
     ratings: 4.2,
     imagePath: require("../assets/images/gunstock.jpg"),
     description:
@@ -116,6 +121,7 @@ export const ShoppingData = [
     name: "M67 Fragmentation Grenade — Live Training/Authorized Use",
     category: "grenades",
     price: 7500.0,
+      discount: 0.15,
     ratings: 4.7,
     imagePath: require("../assets/images/handgrenade.jpg"),
     description:
@@ -137,6 +143,7 @@ export const ShoppingData = [
     name: "Karambit — Tactical Folding Knife (Ceramic Black)",
     category: "melee",
     price: 1299.5,
+    discount: 0.18,
     ratings: 5,
     imagePath: require("../assets/images/karambit.jpg"),
     description:
@@ -157,7 +164,7 @@ export const ShoppingData = [
     id: 8,
     name: "FlamePro FP-250 Theatrical Flame Projector — Professional Stage Effect",
     category: "pyrotechnics",
-    price: 125000.0,
+    price: 1250.0,
     ratings: 4.8,
     imagePath: require("../assets/images/molotov.jpg"),
     description:
