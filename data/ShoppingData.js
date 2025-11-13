@@ -4,7 +4,7 @@ export const ShoppingData = [
     name: "Kalashnikov AK-47 Tactical Series — 7.62 Heritage Edition",
     category: "rifles",
     price: 38041.83,
-    discount: 0.20,
+    discount: 0.2,
     ratings: 4.8,
     imagePath: require("../assets/images/ak47.jpg"),
     description:
@@ -27,7 +27,7 @@ export const ShoppingData = [
     name: "AWP — Precision Long-Range Rifle",
     category: "sniper rifles",
     price: 75876.43,
-    discount: 0.10,
+    discount: 0.1,
     ratings: 4.4,
     imagePath: require("../assets/images/awp.jpg"),
     description:
@@ -78,7 +78,7 @@ export const ShoppingData = [
     name: "M84 Flashbang Grenade — Training & Range Use",
     category: "utilities",
     price: 1250.0,
-      discount: 0.21,
+    discount: 0.21,
     ratings: 4.4,
     imagePath: require("../assets/images/flashbang.jpg"),
     description:
@@ -97,9 +97,9 @@ export const ShoppingData = [
   {
     id: 5,
     name: "Tactical Gunstock — Adjustable Precision Stock",
-    category: "accessories",
+    category: "attachments",
     price: 2999.99,
-      discount: 0.30,
+    discount: 0.3,
     ratings: 4.2,
     imagePath: require("../assets/images/gunstock.jpg"),
     description:
@@ -119,9 +119,9 @@ export const ShoppingData = [
   {
     id: 6,
     name: "M67 Fragmentation Grenade — Live Training/Authorized Use",
-    category: "grenades",
+    category: "utilities",
     price: 7500.0,
-      discount: 0.15,
+    discount: 0.15,
     ratings: 4.7,
     imagePath: require("../assets/images/handgrenade.jpg"),
     description:
@@ -141,7 +141,7 @@ export const ShoppingData = [
   {
     id: 7,
     name: "Karambit — Tactical Folding Knife (Ceramic Black)",
-    category: "melee",
+    category: "knife",
     price: 1299.5,
     discount: 0.18,
     ratings: 5,
@@ -163,8 +163,7 @@ export const ShoppingData = [
   {
     id: 8,
     name: "FlamePro FP-250 Theatrical Flame Projector — Professional Stage Effect",
-    category: "pyrotechnics",
-    price: 1250.0,
+    category: "utilities",
     ratings: 4.8,
     imagePath: require("../assets/images/molotov.jpg"),
     description:
@@ -189,7 +188,7 @@ export const ShoppingData = [
   {
     id: 9,
     name: "4–16×44 Tactical Scope — Compact Precision Optic",
-    category: "optics",
+    category: "attachments",
     price: 6999.0,
     ratings: 4.7,
     imagePath: require("../assets/images/scope.jpg"),
@@ -207,5 +206,79 @@ export const ShoppingData = [
       "Serial number": "SL-41644-2025",
     },
     condition: "Like New — minimal handling; zero marks on lenses.",
+  },
+  {
+    id: 10,
+    name: "PP-19 Vityaz — 9×19mm SMG",
+    category: "smg",
+    price: 18950.0,
+    discount: 0.12,
+    ratings: 4.3,
+    imagePath: require("../assets/images/pp19.jpg"),
+    description:
+      "Compact, reliable 9×19mm submachine gun with a closed-bolt design. Well-suited for close-quarters training, security units, and collectors. Ensure lawful transfer and operator qualification where required.",
+    features: {
+      Manufacturer: "Vityaz Arms",
+      Model: "PP-19-01",
+      Caliber: "9×19mm Parabellum",
+      Action: "Blowback, closed bolt",
+      BarrelLength: "200 mm",
+      Finish: "Black phosphate",
+      Sights: "Fixed iron sights; optic-ready rail",
+      Included: "2× 30-round magazines, sling, case",
+      "Weight (unloaded)": "3.3 kg",
+      "Serial number": "PP19-2025-1010",
+    },
+    condition: "Very Good — function-checked; light handling marks.",
+  },
+  {
+    id: 11,
+    name: "M250 — Squad Automatic Weapon (LMG Style)",
+    category: "lmg",
+    price: 128750.0,
+    discount: 0.08,
+    ratings: 4.6,
+    imagePath: require("../assets/images/m250.jpg"),
+    description:
+      "Belt-fed light machine gun style platform designed for sustained fire and team support roles. Heavy-duty construction with quick-change barrel and robust feed mechanism. Sold to qualified, authorized purchasers with required permits.",
+    features: {
+      Manufacturer: "Advanced Defense Systems",
+      Model: "M250-SAW",
+      Caliber: "6.8mm/5.56mm (configurable)",
+      Action: "Gas-operated, belt-fed",
+      BarrelLength: "500 mm (quick-change)",
+      Finish: "Cerakote matte",
+      Sights: "Optic rail with backup iron sights",
+      Included: "Spare barrel, feed tray, soft case",
+      "Weight (unloaded)": "9.8 kg",
+      "Serial number": "M250-2025-111",
+    },
+    condition:
+      "Like New — minimal handling; function-checked and zeroed by technician.",
+  },
+
+  {
+    id: 12,
+    name: "Colt 1911 — .45 ACP (Colt 45)",
+    category: "secondary",
+    price: 25999.99,
+    discount: 0.1,
+    ratings: 4.7,
+    imagePath: require("../assets/images/colt45.jpg"),
+    description:
+      "Classic Colt 1911-style .45 ACP semi-automatic pistol — iconic ergonomics and proven stopping power. Ideal for collectors and range use; transfers only through legal channels.",
+    features: {
+      Manufacturer: "Colt",
+      Model: "M1911-A1",
+      Caliber: ".45 ACP",
+      Action: "Single-action, semi-automatic",
+      BarrelLength: "5 in",
+      Finish: "Blued steel",
+      Sights: "Fixed three-dot",
+      Included: "2× 7-round magazines, hard case, manual",
+      Weight: "1.1 kg (unloaded)",
+      "Serial number": "C45-2025-1212",
+    },
+    condition: "Very Good — well maintained; function-checked.",
   },
 ];

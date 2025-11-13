@@ -1,5 +1,7 @@
+import Toast from '@/components/Toast';
 import { ShoppingData } from '@/data/ShoppingData';
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { router, useLocalSearchParams } from 'expo-router';
 import { ChevronLeft, ShoppingCart, StarIcon } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Dimensions, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -7,36 +9,45 @@ import { Dimensions, FlatList, Image, ScrollView, Text, TouchableOpacity, View }
 const Product = () => {
     
     const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
 
     const screenWidth = Dimensions.get('window').width
-    const navigate = useNavigation();
 
     const { id } = useLocalSearchParams();
 
     const product: any = ShoppingData.find(prod => prod.id?.toLocaleString() == id);
     const features: any = Object.entries(product?.features?? {}).map(([label, value]) => ({id: label, label, value}))
     
-    const addToCart = () => {
+    const addToCart = async () => {
+        try {
+            const data = await AsyncStorage.getItem('cart');
+            let cartData: number[] = JSON.parse(data || '[]');
 
-        const data = localStorage.getItem('cart');
-        let cartData = JSON.parse(data) || [];
+            const strId = Array.isArray(id) ? id[0] : id;
+            const numId = Number.parseInt(strId);
 
-        const strId = Array.isArray(id) ? id[0] : id;
-        const numId = Number.parseInt(strId);
+            if (cartData.includes(numId)) {
+                handleSetToastMessage('Product is already in the cart');
+                return;
+            }
 
-        if (cartData.includes(numId)) {
-            console.log("Product is already in the cart");
-            return;
+            const newCart = [...cartData, numId];
+            await AsyncStorage.setItem('cart', JSON.stringify(newCart));
+
+            handleSetToastMessage('Item has been added to cart');
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            handleSetToastMessage('Failed to add item to cart');
         }
+    };
 
-        const newCart = [...cartData, numId];
-        localStorage.setItem('cart', JSON.stringify(newCart));
-        console.log("Item has been added to cart");
+    const handleSetToastMessage = (message: string) => {
+        setToastMessage(message);
     }
 
     return (
         <View className='flex-1 bg-black/10'>
-            <TouchableOpacity onPress={() => navigate.goBack()} className='flex-row gap-2 items-center absolute z-10 bg-white p-2 rounded-xl aspect-square top-2 left-2 border border-black/50'>
+            <TouchableOpacity onPress={() => router.push('/')} className='flex-row gap-2 items-center absolute z-10 bg-white p-2 rounded-xl aspect-square top-2 left-2 border border-black/50'>
                 <ChevronLeft size={28} />
             </TouchableOpacity>
             <ScrollView className='relative' contentContainerStyle={{ paddingBottom: 120 }}>
@@ -111,15 +122,21 @@ const Product = () => {
             </ScrollView>
 
             <View className='absolute bottom-0 w-full flex-row p-2 gap-2 z-100'> 
-                <TouchableOpacity className='p-4 bg-gray-50 rounded-md shadow-md' onPress={addToCart}>
-                    <ShoppingCart size={28} className='text-black/75' />
-                </TouchableOpacity>
+                {/* <TouchableOpacity className='p-4 bg-gray-50 rounded-md shadow-md' onPress={addToCart}>
+                </TouchableOpacity> */}
 
-                <TouchableOpacity className='p-4 bg-dark rounded-md flex-1 items-center justify-center'>
-                    <Text className='text-white font-bold text-xl'>
-                        Buy Now
+                <TouchableOpacity className='ml-auto p-4 bg-dark rounded-md items-center justify-center flex-row gap-2' onPress={addToCart}>
+                    <ShoppingCart size={28} className='text-white' />
+                    <Text className='text-white font-semibold text-xl'>
+                        Add to Cart
                     </Text>
                 </TouchableOpacity>
+            </View>
+
+            <View className='absolute top-2 right-2 z-10'>
+                {(toastMessage) &&
+                    <Toast message={toastMessage} onClose={() => handleSetToastMessage('')}/>
+                }
             </View>
         </View>
     )

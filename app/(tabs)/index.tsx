@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import { useRouter } from 'expo-router';
 import { SearchIcon, ShoppingCart, SlidersHorizontal, StarIcon, X } from 'lucide-react-native';
 import React, { useEffect, useState } from 'react';
@@ -79,66 +80,81 @@ export default function Shop() {
 					<TouchableOpacity onPress={() => router.push('/cart')} className='p-1'><ShoppingCart size={20} className='text-white'/></TouchableOpacity>
 				</View>
 
-				<View className='p-2 rounded-lg border border-black/20 bg-white flex-row items-center gap-2 mb-4'>
+				<View className='p-2 rounded-lg border border-black/20 bg-white flex-row items-center gap-2'>
 					<SearchIcon width={18} className='text-black/50'/>
 					<TextInput value={search} onChangeText={(text) => setSearch(text)} className='focus:outline-none border-white border focus:border-b-dark/50 w-full px-2 py-1' placeholder='Search for a weapon...' />
 					<TouchableOpacity onPress={() => setShowFilter(!showFilter)} className='p-1 rounded-md bg-dark aspect-square'>
 						<SlidersHorizontal width={18} className='text-white' />
 					</TouchableOpacity>
 				</View>
+
+				<ScrollView horizontal showsHorizontalScrollIndicator={false} className='px-2 mt-2 flex-row gap-2 items-center'>
+					{(search) && 
+						<TouchableOpacity onPress={() => setSearch('')} className='px-2 py-0.5 rounded-xl border border-white w-fit flex-row gap-2 items-center mr-2'>
+							<Text className='text-xs text-white max-w-20 truncate'>Search: {search}</Text><X size={12} className='text-white' />
+						</TouchableOpacity>}
+					{(activeCategory) && 
+						<TouchableOpacity onPress={() => handleSetCategory('')} className='px-2 py-0.5 rounded-xl border border-white w-fit flex-row gap-2 items-center mr-2'>
+							<Text className='text-xs text-white'>Category: {activeCategory}</Text><X size={12} className='text-white' />
+						</TouchableOpacity>}
+					{(sortType) && 
+						<TouchableOpacity onPress={() => {setSortType(''); setSortOrder('')}} className='px-2 py-0.5 rounded-xl border border-white w-fit flex-row gap-2 items-center '>
+							<Text className='text-xs text-white'>Sort: {capitalize(sortType)} : {capitalize(sortOrder)}</Text><X size={12} className='text-white' />
+						</TouchableOpacity>}
+				</ScrollView>
 			</View>
 			
-			<ScrollView horizontal showsHorizontalScrollIndicator={false} className='p-1 my-2 flex-row gap-2 items-center'>
-				{(search) && 
-					<TouchableOpacity onPress={() => setSearch('')} className='px-2 py-0.5 rounded-xl border border-black/20 w-fit flex-row gap-2 items-center mr-2'>
-						<Text className='text-xs text-black/50 max-w-20 truncate'>Search: {search}</Text><X size={12} className='text-black/50' />
-					</TouchableOpacity>}
-				{(activeCategory) && 
-					<TouchableOpacity onPress={() => handleSetCategory('')} className='px-2 py-0.5 rounded-xl border border-black/20 w-fit flex-row gap-2 items-center mr-2'>
-						<Text className='text-xs text-black/50'>Category: {activeCategory}</Text><X size={12} className='text-black/50' />
-					</TouchableOpacity>}
-				{(sortType) && 
-					<TouchableOpacity onPress={() => {setSortType(''); setSortOrder('')}} className='px-2 py-0.5 rounded-xl border border-black/20 w-fit flex-row gap-2 items-center '>
-						<Text className='text-xs text-black/50'>Sort: {capitalize(sortType)} : {capitalize(sortOrder)}</Text><X size={12} className='text-black/50' />
-					</TouchableOpacity>}
-			</ScrollView>
 
 			{/* Promotions */}
-			<ScrollView showsHorizontalScrollIndicator={false} pagingEnabled horizontal className='h-60 rounded-xl shadow-md shadow-black/20 bg-white'>
-				<View className='w-full'>
-					<ImageBackground source={require('../../assets/images/eminem-sponsor.jpg')} resizeMode='cover' style={{
-						height: 200,
-						width: screenWidth,
-					}}>
-					<Text className='h-full w-36 font-bold text-2xl p-4 items-center'>
-						Absolute illegal!
-					</Text>
-					</ImageBackground>
-					<Text className='text-center font-semibold text-md mt-2'>
-					One of the best I've ever used! - Eminem
-					</Text>
-				</View>
-				<View style={{
-					backgroundColor: '#FFFFFF',
-					width: screenWidth-40
-				}}>
-					<ImageBackground source={require('../../assets/images/cj-sponsor.jpg')} imageStyle={{ resizeMode: 'cover', top: 0 }} style={{
-						height: 200,
-						width: "100%",
-						padding: 4
-					}}>
-					<Text className='ml-auto text-center w-32 font-bold text-xl p-4 items-center bg-white rounded-md'>
-						Black pocket. Home.
-					</Text>
-					</ImageBackground>
-					<Text className='text-center font-semibold text-md mt-2'>
-					Ah shit, here we go again - Carl Johnson
-					</Text>
-				</View>
-			</ScrollView>
+			<View className='px-4 mt-4'>
+				<ScrollView showsHorizontalScrollIndicator={false} pagingEnabled horizontal className='h-60 rounded-xl shadow-md shadow-black/20 bg-white'>
+
+					<View className='w-full'>
+						<ImageBackground source={require('../../assets/images/eminem-sponsor.jpg')} resizeMode='cover' style={{
+							height: 200,
+							width: screenWidth,
+						}}>
+						<Text className='mr-auto mt-auto ml-4 mb-4 text-center font-bold text-lg px-4 py-2 items-center bg-white rounded-md'>
+							Violence is the solution
+						</Text>
+						</ImageBackground>
+						<Text className='text-center font-semibold text-md mt-2'>
+						You got a problem? They got solution here. - Eminem
+						</Text>
+					</View>
+
+					<View className='w-full'>
+						<ImageBackground source={require('../../assets/images/cj-sponsor.jpg')} imageStyle={{ resizeMode: 'cover', top: 0 }} style={{
+							height: 200,
+							width: screenWidth,
+						}}>
+						<Text className='ml-auto mt-auto mr-4 mb-4 text-center font-bold text-lg px-4 py-2 items-center bg-white rounded-md'>
+							Black pocket. Home.
+						</Text>
+						</ImageBackground>
+						<Text className='text-center font-semibold text-md mt-2'>
+						Ah shit, here we go again - Carl Johnson
+						</Text>
+					</View>
+
+					<View className='w-full'>
+						<ImageBackground source={require('../../assets/images/harry-sponsor.jpg')} imageStyle={{ resizeMode: 'cover', top: 0 }} style={{
+							height: 200,
+							width: screenWidth,
+						}}>
+						<Text className='ml-auto mt-auto mr-4 mb-4 text-center font-bold text-lg px-4 py-2 items-center bg-white rounded-md'>
+							Guns. Guns everywhere.
+						</Text>
+						</ImageBackground>
+						<Text className='text-center font-semibold text-md mt-2'>
+						These are the real magic - Harry Potter
+						</Text>
+					</View>
+				</ScrollView>
+			</View>
+
 			
 			<View className='p-2'>
-
 
 			<Text className='font-semibold text-black/50 mt-8 text-lg mb-2'>
 				Categories
@@ -196,11 +212,12 @@ export default function Shop() {
 			}
 			/>
 			:
-			<Text className='mt-8 text-center font-semibold text-black/50'>No product found, sarge.</Text>
+			<Text className='mt-8 text-center font-semibold text-black/50 h-80'>No product found, sarge.</Text>
 			}
 			</View>
-		</ScrollView>
 
+			<Footer />
+		</ScrollView>
 		<Filter onShow={showFilter} onChangeShow={() => setShowFilter(!showFilter)} onChangeSort={handleSetSort} />
     </View>
   );

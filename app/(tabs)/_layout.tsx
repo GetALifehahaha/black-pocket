@@ -1,12 +1,12 @@
 import { Tabs } from 'expo-router'
-import { ShoppingBasket, ShoppingCart, User2 } from 'lucide-react-native'
+import { Info, ShoppingBasket, ShoppingCart } from 'lucide-react-native'
 import React from 'react'
 import { Text, View } from 'react-native'
 
 const TabIcon = ({focused, icon: Icon, text}: any) => {
     if (focused) {
         return (
-            <View className='flex-row gap-2 items-center px-4 py-2 rounded-full bg-blue'>
+            <View className='flex-row gap-2 items-center px-4 py-2 rounded-xl bg-blue'>
                 <Icon size={22} className="text-white" />
                 <Text className='text-white'>{text}</Text>
             </View>
@@ -32,9 +32,7 @@ const _layout = () => {
                 height: '100%',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-            },
-            tabBarStyle: {
-                backgroundColor: 'dark',
+                paddingTop: 4
             },
         }}
     >
@@ -61,7 +59,7 @@ const _layout = () => {
             headerShown: false,
             tabBarIcon: ({ focused }) => (
                 <>
-                    <TabIcon focused={focused} icon={User2} text="About"/>
+                    <TabIcon focused={focused} icon={Info} text="About"/>
                 </>
             )
         }} />
